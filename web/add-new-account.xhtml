@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>New Account</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <ui:insert>
+                <ui:include src="layout/main.xhtml" />
+            </ui:insert>
+            <p:panel id="newAccountPanel" header="Add New Account">
+                <h:panelGrid columns="2">
+                    <p:row>
+                        <p:column>
+                            <h:outputText value="Holder name" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText autocomplete="false" value="#{accountBean.newAccount.holder}" required="true" requiredMessage="Holder value is required!" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Choose currency" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{accountBean.newAccount.currency}" required="true" requiredMessage="Currency value is required!" />
+                        </p:column>
+                        <p:column>
+                            <h:outputText value="Amount name" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{accountBean.newAccount.amount}" required="true" requiredMessage="Amount value is required!" />
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Create Account" icon="fa fa-fw fa-save" actionListener="#{accountBean.createAccount()}">
+                                <p:confirm header="Create Account" message="Are you sure you want to create account with these values?" icon="fa fa-fw fa-shield" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:row>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Yes" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes" />
+                <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no" />
+            </p:confirmDialog>
+
+        </h:form>
+    </h:body>
+</html>
