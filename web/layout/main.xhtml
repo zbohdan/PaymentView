@@ -12,10 +12,22 @@ and open the template in the editor.
     <h:head></h:head>
     <h:body>
         <ui:composition>
-            <p:breadCrumb>
-                <p:menuitem value="Home" url="/faces/index.xhtml" />
-                <p:menuitem value="New Account" url="/faces/add-new-account.xhtml" />
-            </p:breadCrumb>
+            <p:menubar>
+                <p:menuitem icon="fa fa-fw fa-home" value="Home" url="/faces/index.xhtml" />
+                <p:menuitem icon="fa fa-fw fa-plus" value="New Account" url="/faces/add-new-account.xhtml" />
+                <p:submenu label="RESTful" icon="fa fa-fw fa-eye">
+                    <p:submenu label="Users" icon="fa fa-fw fa-eye">
+                        <p:menuitem value="All" url="/faces/api/users" />
+                        <p:menuitem value="Find by ID" url="/faces/api/users/1" />
+                    </p:submenu>
+                    <p:separator />
+                    <p:submenu label="Accounts" icon="fa fa-fw fa-eye">
+                        <p:menuitem value="All" url="/faces/api/accounts" />
+                        <p:menuitem value="Find by ID" url="/faces/api/accounts/20" />
+                    </p:submenu>
+                    <p:separator />
+                </p:submenu>
+            </p:menubar>
         </ui:composition>
     </h:body>
 </html>

@@ -11,47 +11,55 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>New Account</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />        
     </h:head>
     <h:body>
         <h:form>
             <ui:insert>
                 <ui:include src="layout/main.xhtml" />
             </ui:insert>
-            <p:panel id="newAccountPanel" header="Add New Account">
-                <h:panelGrid columns="2">
-                    <p:row>
-                        <p:column>
-                            <h:outputText value="Holder name" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText autocomplete="false" value="#{accountBean.newAccount.holder}" required="true" requiredMessage="Holder value is required!" />
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Choose currency" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText value="#{accountBean.newAccount.currency}" required="true" requiredMessage="Currency value is required!" />
-                        </p:column>
-                        <p:column>
-                            <h:outputText value="Amount name" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText value="#{accountBean.newAccount.amount}" required="true" requiredMessage="Amount value is required!" />
-                        </p:column>
-                        <p:column>
-                            <p:commandButton value="Create Account" icon="fa fa-fw fa-save" actionListener="#{accountBean.createAccount()}">
+            
+            <p:growl id="msg" showDetail="true" />
+            
+            <p:layout>
+                <p:layoutUnit position="west" style="min-width: 200px; min-height: 50px;">
+                    <h3>To add new account fill three attributes:</h3>
+                    <ul>
+                        <li>Holder - string name of account holder.</li>
+                        <li>Amount - decimal amount of cash assets.</li>
+                        <li>Currency - 3 symbolic currency code (USD, EUR, GBP etc).</li>
+                    </ul>
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <h2>Enter Account details</h2>
+                    <p:panelGrid columns="1" style="margin-left: 1.5em;"> 
+                        <p:row>
+                            <h:outputLabel value="Name of Holder" /><br/>
+                            <p:inputText value="#{accountBean.newAccount.holder}" required="true" />
+                        </p:row>
+                        <p:row>
+                            <h:outputLabel value="Amount" /><br/>
+                            <p:inputText value="#{accountBean.newAccount.amount}" 
+                                         required="true"  
+                                         requiredMessage="Amount value is required!" />
+                        </p:row>
+                        <p:row>
+                            <h:outputLabel value="Currency" /><br/>
+                            <p:inputText value="#{accountBean.newAccount.currency}" required="true" />
+                        </p:row>
+                        <p:row>
+                            <p:commandButton value="Create" update="@form:msg" icon="fa fa-fw fa-save" actionListener="#{accountBean.createAccount()}" >
                                 <p:confirm header="Create Account" message="Are you sure you want to create account with these values?" icon="fa fa-fw fa-shield" />
                             </p:commandButton>
-                        </p:column>
-                    </p:row>
-                </h:panelGrid>
-            </p:panel>
-
+                        </p:row>
+                    </p:panelGrid>
+                </p:layoutUnit>
+            </p:layout>
+            
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                 <p:commandButton value="Yes" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes" />
                 <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no" />
             </p:confirmDialog>
-
         </h:form>
     </h:body>
 </html>
